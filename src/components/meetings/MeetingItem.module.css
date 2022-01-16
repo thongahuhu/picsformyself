@@ -1,0 +1,67 @@
+.card {
+  margin-top: 12px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.cardList {
+  background-color: #1b1b1b;
+  margin-right: 0;
+  cursor: pointer;
+  max-height: 382px;
+}
+
+.cardList:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+  z-index: 2;
+  -webkit-transition: all ease 0.2s;
+  transition: all ease 0.2s;
+}
+
+.cardItem {
+  color: #fff;
+  text-align: center;
+  font-weight: 400;
+}
+
+.cardItemTitle {
+  color: #f90;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.cardItemAddress {
+  font-style: italic;
+  height: 24px;
+  overflow: hidden;
+  display: block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cardItemDesc {
+  height: 24px;
+  overflow: hidden;
+  display: block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cardItemBtn {
+  width: 100%;
+}
+
+.cardImg {
+  cursor: pointer;
+  min-width: 286px;
+  min-height: 195.5px;
+}
+/*# sourceMappingURL=MeetingItem.module.css.map */

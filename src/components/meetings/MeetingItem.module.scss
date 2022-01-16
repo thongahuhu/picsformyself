@@ -1,0 +1,65 @@
+$primary-Color: #fff;
+$primary-BG: #1b1b1b;
+$second-Color: #f90;
+
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin setTextOneLine {
+  height: 24px;
+  overflow: hidden;
+  display: block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card {
+  margin-top: 12px;
+  @include flexCenter;
+}
+
+.cardList {
+  background-color: $primary-BG;
+  margin-right: 0;
+  cursor: pointer;
+  max-height: 382px;
+  &:hover {
+    transform: scale(1.1);
+    z-index: 2;
+    transition: all ease 0.2s;
+  }
+}
+
+.cardItem {
+  color: $primary-Color;
+  text-align: center;
+  font-weight: 400;
+}
+
+.cardItemTitle {
+  color: $second-Color;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.cardItemAddress {
+  font-style: italic;
+  @include setTextOneLine();
+}
+
+.cardItemDesc {
+  @include setTextOneLine();
+}
+
+.cardItemBtn {
+  width: 100%;
+}
+
+.cardImg {
+  cursor: pointer;
+  min-width: 286px;
+  min-height: 195.5px;
+}

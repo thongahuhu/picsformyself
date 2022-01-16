@@ -1,0 +1,32 @@
+.navLinks {
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+  margin: 10px;
+}
+
+.navLinks:hover {
+  color: #f90;
+}
+
+.navLinks span {
+  color: #f90;
+}
+
+.active {
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 600;
+  color: #f90;
+  margin: 10px;
+}
+
+.active:hover {
+  color: #fff;
+}
+
+.active span {
+  color: #f90;
+}
+/*# sourceMappingURL=NavLinks.module.css.map */

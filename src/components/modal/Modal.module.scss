@@ -1,0 +1,91 @@
+$primary-Color: #fff;
+$primary-BG: #1b1b1b;
+$second-Color: #f90;
+
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.backDrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  box-shadow: 0 25px 50px rgba($color: #000000, $alpha: 0.2);
+  background: transparent;
+  backdrop-filter: blur(10px);
+  transition: 0.5s;
+  z-index: 3000;
+  @include flexCenter();
+  animation: ease 0.5s;
+}
+
+.card {
+  z-index: 3001;
+  background-color: $primary-BG;
+  text-align: center;
+
+  &:hover .modalImg {
+    display: block;
+  }
+}
+
+.editContainer {
+  max-width: 600px;
+  margin: 0;
+}
+
+//PC
+@media (min-width: 1024px) {
+  .editContainer {
+    height: 100vh;
+  }
+}
+
+@media (min-width: 740px) and (max-width: 1023px) {
+  .editContainer {
+    height: 100vh;
+  }
+}
+
+@media (max-width: 739px) {
+  .editContainer {
+    height: 120vh;
+  }
+}
+
+//Mobile & Tablet
+@media only screen and (max-width: 1023px) {
+  .card {
+    &.displayNone {
+      display: none;
+    }
+  }
+}
+
+.cardImg {
+  cursor: pointer;
+  width: 100%;
+}
+
+.cardBody {
+  font-weight: 600;
+  color: $primary-Color;
+}
+
+.cardTitle {
+  color: $second-Color;
+  font-weight: 700;
+  font-size: 28px;
+}
+
+.cardAddress {
+  font-style: italic;
+}
+
+.cardBtn {
+  width: 50%;
+}

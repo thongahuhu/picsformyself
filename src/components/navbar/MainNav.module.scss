@@ -1,0 +1,47 @@
+$primary-Color: #fff;
+$primary-BG: #1b1b1b;
+$second-Color: #f90;
+
+@mixin flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainNav {
+  background-color: $primary-BG;
+}
+
+.navBrand {
+  font-weight: 700;
+  font-size: 40px;
+}
+
+.navLogoLink {
+  text-decoration: none;
+  color: $primary-Color;
+  &:hover {
+    color: $second-Color;
+    span {
+      color: $primary-Color;
+    }
+  }
+}
+
+.navLogoLinkBack {
+  color: $primary-BG;
+  background-color: $second-Color;
+  border-radius: 4px;
+  font-size: 40px;
+  margin-left: 4px;
+}
+
+.hamburgerMenu {
+  display: none;
+}
+
+@media only screen and (max-width: 1023px) {
+  .hamburgerMenu {
+    display: block;
+  }
+}

@@ -1,0 +1,62 @@
+$primary-Color: #fff;
+$primary-BG: #1b1b1b;
+$second-Color: #f90;
+
+.form {
+  margin-top: 50px;
+}
+
+.formLabel {
+  color: $second-Color;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.formControl {
+  background-color: $primary-BG;
+  color: $primary-Color;
+  border: 1px solid $primary-Color;
+}
+
+.formDrop {
+  margin: 20px 0;
+}
+
+.formDropMenu {
+  width: 200px;
+  background-color: $primary-BG;
+}
+
+.formDropMenuItem {
+  font-size: 18px;
+  line-height: 2;
+  font-weight: 600;
+  color: $primary-Color;
+
+  &:active {
+    background-color: $second-Color;
+    color: $primary-Color;
+  }
+
+  &:hover {
+    background-color: $second-Color;
+    color: $primary-Color;
+  }
+}
+
+.previewPic {
+  width: 300px;
+  margin: 8px 0 0 40px;
+  border-radius: 4px;
+}
+
+.formBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 12px 0 20px 0;
+
+  button {
+    width: 500px;
+  }
+}

@@ -1,0 +1,40 @@
+.mainNav {
+  background-color: #1b1b1b;
+}
+
+.navBrand {
+  font-weight: 700;
+  font-size: 40px;
+}
+
+.navLogoLink {
+  text-decoration: none;
+  color: #fff;
+}
+
+.navLogoLink:hover {
+  color: #f90;
+}
+
+.navLogoLink:hover span {
+  color: #fff;
+}
+
+.navLogoLinkBack {
+  color: #1b1b1b;
+  background-color: #f90;
+  border-radius: 4px;
+  font-size: 40px;
+  margin-left: 4px;
+}
+
+.hamburgerMenu {
+  display: none;
+}
+
+@media only screen and (max-width: 1023px) {
+  .hamburgerMenu {
+    display: block;
+  }
+}
+/*# sourceMappingURL=MainNav.module.css.map */

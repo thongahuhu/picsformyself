@@ -1,0 +1,40 @@
+$primary-Color: #fff;
+$primary-BG: #1b1b1b;
+$second-Color: #f90;
+$background-Color: #000;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $background-Color;
+  height: 100vh;
+}
+
+::selection {
+  //Màu của hành động highlight text
+  background-color: $second-Color;
+}
+
+/* Scroll */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: $background-Color;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $second-Color;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: $primary-BG;
+}

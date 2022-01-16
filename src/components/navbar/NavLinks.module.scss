@@ -1,0 +1,33 @@
+$primary-Color: #fff;
+$primary-BG: #1b1b1b;
+$second-Color: #f90;
+
+.navLinks {
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 600;
+  color: $primary-Color;
+  margin: 10px;
+  &:hover {
+    color: $second-Color;
+  }
+
+  span {
+    color: $second-Color;
+  }
+}
+
+.active {
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 600;
+  color: $second-Color;
+  margin: 10px;
+  &:hover {
+    color: $primary-Color;
+  }
+
+  span {
+    color: $second-Color;
+  }
+}
