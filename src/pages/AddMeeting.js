@@ -13,7 +13,7 @@ function AddMeeting() {
 
   React.useEffect(() => {
     NavActiveCtx.handleActiveTab("Add");
-  }, []);
+  }, [NavActiveCtx]);
 
   const handleAddMeeting = (meetingData) => {
     fetch(

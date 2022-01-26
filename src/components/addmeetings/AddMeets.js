@@ -1,6 +1,6 @@
 import React from "react";
-import { useRef } from "react";
-import { Form, Button, Dropdown } from "react-bootstrap";
+import { useRef, useState } from "react";
+import { Form, Button, Dropdown, ProgressBar } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./AddMeets.module.scss";
 import "../sass/_custom.scss";
@@ -8,10 +8,11 @@ import { storage } from "../../firebase/config";
 import { ref, uploadBytesResumable, getDownloadURL } from "@firebase/storage";
 
 function AddMeets(props) {
-  const [optionPost, setOptionPost] = React.useState();
-  const [preview, setPreview] = React.useState();
-  const [image, setImage] = React.useState();
-  const [urlImg, setUrlImg] = React.useState();
+  const [optionPost, setOptionPost] = useState();
+  const [preview, setPreview] = useState();
+  const [image, setImage] = useState();
+  const [urlImg, setUrlImg] = useState();
+  const [progress, setProgress] = useState();
 
   React.useEffect(() => {
     return () => {
@@ -40,7 +41,7 @@ function AddMeets(props) {
         const prog = Math.round(
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100 //Dùng để làm thanh progress tải lên
         );
-        console.log(prog);
+        setProgress(prog);
       },
       (err) => console.log(err),
       () => {
@@ -87,7 +88,6 @@ function AddMeets(props) {
         <Form.Label className={styles.formLabel}>Picture Title</Form.Label>
         <Form.Control
           type="text"
-          required
           className={styles.formControl}
           ref={titleInputRef}
           placeholder="Enter title..."
@@ -98,7 +98,6 @@ function AddMeets(props) {
         <Form.Label className={styles.formLabel}>Picture Source</Form.Label>
         <Form.Control
           type="text"
-          required
           className={styles.formControl}
           ref={addressInputRef}
           placeholder="Enter address..."
@@ -110,7 +109,6 @@ function AddMeets(props) {
         <Form.Control
           as="textarea"
           rows={5}
-          required
           className={styles.formControl}
           ref={descInputRef}
           placeholder="Enter description..."
@@ -137,6 +135,7 @@ function AddMeets(props) {
         <Form.Group controlId="formFile" className="mb-3">
           <Form.Label className={styles.formLabel}>Picture (File)</Form.Label>
           <Form.Control
+            required
             type="file"
             className={styles.formControl}
             onChange={(e) => formHandler(e)}
@@ -165,6 +164,10 @@ function AddMeets(props) {
         </Dropdown.Menu>
         {preview && <img src={preview} alt="" className={styles.previewPic} />}
       </Dropdown>
+
+      {progress > 0 && (
+        <ProgressBar now={progress} label={`${progress}%`} variant="warning" />
+      )}
 
       <Form.Group className={styles.formBtn}>
         <Button variant="warning" type="submit">

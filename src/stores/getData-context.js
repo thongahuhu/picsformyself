@@ -20,7 +20,7 @@ export function LoadingContextProvider({ children }) {
             id: key,
             ...data[key],
           };
-          meetings.push(meeting);
+          meetings.unshift(meeting);
         }
         setIsLoading(false);
         setLoadedMeetings(meetings);

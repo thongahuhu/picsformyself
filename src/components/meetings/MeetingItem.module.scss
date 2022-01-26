@@ -56,6 +56,18 @@ $second-Color: #f90;
 
 .cardItemBtn {
   width: 100%;
+
+  & a {
+    text-decoration: none;
+    color: $primary-BG;
+  }
+
+  &:hover,
+  &:active {
+    a {
+      color: $primary-Color;
+    }
+  }
 }
 
 .cardImg {

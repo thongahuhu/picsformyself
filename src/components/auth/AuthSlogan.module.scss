@@ -1,0 +1,71 @@
+$primary-Color: #fff;
+$primary-BG: #1b1b1b;
+$second-Color: #f90;
+
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.authLogo {
+  font-size: 40px;
+  font-weight: 700;
+  color: $primary-Color;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    color: $second-Color;
+
+    span {
+      color: $primary-Color;
+    }
+  }
+}
+
+.authLogoBack {
+  color: $primary-BG;
+  background-color: $second-Color;
+  border-radius: 4px;
+}
+
+.authSlogan {
+  width: 80%;
+  font-size: 54px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: $primary-Color;
+  margin-top: 30px;
+}
+
+.profileIcons {
+  margin: 20px;
+  cursor: pointer;
+
+  &:hover {
+    fill: $second-Color;
+  }
+}
+
+@media (max-width: 1023px) {
+  .authSloganSection {
+    padding: 0;
+    width: 100%;
+    margin-top: 10px;
+  }
+  .authLogo,
+  .authSlogan {
+    display: none;
+    font-size: 45px;
+  }
+
+  .profileIconSection {
+    @include flexCenter();
+
+    svg {
+      width: 28px;
+      height: 28px;
+    }
+  }
+}

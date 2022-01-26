@@ -12,7 +12,7 @@ function MainNav() {
       <Container>
         <Navbar.Brand className={styles.navBrand}>
           <Link className={styles.navLogoLink} to={"/"}>
-            picsformyself
+            Pics<span className={styles.navLogoLinkBack}>hub</span>
           </Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

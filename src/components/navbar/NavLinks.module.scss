@@ -8,6 +8,7 @@ $second-Color: #f90;
   font-weight: 600;
   color: $primary-Color;
   margin: 10px;
+  padding: 0;
   &:hover {
     color: $second-Color;
   }

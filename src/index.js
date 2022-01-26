@@ -6,16 +6,19 @@ import { BrowserRouter } from "react-router-dom";
 import { FavoriteContextProvider } from "./stores/favorite-context";
 import { NavActiveProvider } from "./stores/navactive-context";
 import { LoadingContextProvider } from "./stores/getData-context";
+import { AuthContextProvider } from "./stores/auth-context";
 
 ReactDOM.render(
-  <FavoriteContextProvider>
-    <NavActiveProvider>
-      <LoadingContextProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </LoadingContextProvider>
-    </NavActiveProvider>
-  </FavoriteContextProvider>,
+  <AuthContextProvider>
+    <FavoriteContextProvider>
+      <NavActiveProvider>
+        <LoadingContextProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </LoadingContextProvider>
+      </NavActiveProvider>
+    </FavoriteContextProvider>
+  </AuthContextProvider>,
   document.getElementById("root")
 );

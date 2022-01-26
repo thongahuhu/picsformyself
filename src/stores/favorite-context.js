@@ -18,7 +18,7 @@ export function FavoriteContextProvider({ children }) {
   );
 
   function getLocalStorageLength() {
-    const length = JSON.parse(localStorage.getItem("favorite")).length; //Code ngu nhưng làm biếng fix
+    const length = JSON.parse(localStorage.getItem("favorite")).length;
 
     return length;
   }
@@ -52,7 +52,7 @@ export function FavoriteContextProvider({ children }) {
   }
 
   function itemIsFavoriteHandler(meetupId) {
-    const dataStorage = JSON.parse(localStorage.getItem("favorite")); //Code quá ngu
+    const dataStorage = JSON.parse(localStorage.getItem("favorite"));
 
     if (!dataStorage || dataStorage.length === 0) {
       return userFavorites.some((meetup) => meetup.id === meetupId);
