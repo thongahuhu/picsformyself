@@ -61,11 +61,12 @@ $second-Color: #f90;
   }
 
   .profileIconSection {
-    @include flexCenter();
+    // @include flexCenter();
 
-    svg {
-      width: 28px;
-      height: 28px;
-    }
+    // svg {
+    //   width: 28px;
+    //   height: 28px;
+    // }
+    display: none;
   }
 }
