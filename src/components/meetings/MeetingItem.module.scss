@@ -75,3 +75,11 @@ $second-Color: #f90;
   min-width: 286px;
   min-height: 195.5px;
 }
+
+@media (max-width: 1023px) {
+  .cardList {
+    &:hover {
+      transform: scale(1);
+    }
+  }
+}
