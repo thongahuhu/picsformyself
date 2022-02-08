@@ -1,7 +1,4 @@
-$primary-Color: #fff;
-$primary-BG: #1b1b1b;
-$second-Color: #f90;
-$background-Color: #000;
+@import '../src/components/sass/colors';
 
 * {
   margin: 0;
@@ -10,13 +7,13 @@ $background-Color: #000;
 }
 
 body {
-  background-color: $background-Color;
+  background-color: $main-background-color;
   height: 100vh;
 }
 
 ::selection {
   //Màu của hành động highlight text
-  background-color: $second-Color;
+  background-color: $second-color;
 }
 
 /* Scroll */
@@ -26,15 +23,15 @@ body {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: $background-Color;
+  background: $background-color;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: $second-Color;
+  background: $second-color;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: $primary-BG;
+  background: $background-color;
 }

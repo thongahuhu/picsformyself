@@ -4,11 +4,11 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .cardList {
@@ -20,7 +20,7 @@
 
 .cardList:hover {
   -webkit-transform: scale(1.1);
-          transform: scale(1.1);
+  transform: scale(1.1);
   z-index: 2;
   -webkit-transition: all ease 0.2s;
   transition: all ease 0.2s;
@@ -64,4 +64,4 @@
   min-width: 286px;
   min-height: 195.5px;
 }
-/*# sourceMappingURL=MeetingItem.module.css.map */
+/*# sourceMappingURL=PictureItem.module.css.map */

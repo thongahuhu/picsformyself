@@ -1,82 +1,90 @@
-import React from "react";
-import { createContext, useState } from "react";
+import React, { createContext, useState } from 'react'
+
+import { storageFavoriteKey } from '../constants/_keyStorage'
 
 const FavoriteContext = createContext({
   favorites: [],
   totalFavorites: 0,
-  addFavorite: (favoriteMeetup) => {},
-  removeFavorite: (meetingId) => {},
-  itemIsFavorite: (meetingId) => {},
-});
+  addFavorite: favoritePicture => {},
+  removeFavorite: pictureId => {},
+  itemIsFavorite: pictureId => {},
+})
 
 export function FavoriteContextProvider({ children }) {
-  const dataStorage = localStorage.getItem("favorite");
+  const dataStorageJSON = JSON.parse(localStorage.getItem(storageFavoriteKey))
 
-  const [userFavorites, setUserFavorites] = useState([]);
-  const [favoriteNumber, setFavoriteNumber] = useState(
-    dataStorage ? getLocalStorageLength() : userFavorites.length
-  );
+  const [userFavorites, setUserFavorites] = useState([])
+
+  const [userFavoritesNumber, setUserFavoritesNumber] = useState(
+    dataStorageJSON ? getLocalStorageLength() : userFavorites.length
+  )
 
   function getLocalStorageLength() {
-    const length = JSON.parse(localStorage.getItem("favorite")).length;
-
-    return length;
+    return JSON.parse(localStorage.getItem(storageFavoriteKey)).length // vi 1 ly do gi do khong dung duoc bien dataStorageJSON o tren
   }
 
-  function handleSetFavoriteNumber() {
-    setFavoriteNumber(getLocalStorageLength());
+  const newFavoritesJSONHandler = favorites => {
+    return JSON.stringify(favorites)
   }
 
-  function addFavoriteHandler(favoriteMeeting) {
-    setUserFavorites((prevUserFavorites) => {
-      const data = prevUserFavorites.concat(favoriteMeeting);
-      localStorage.setItem("favorite", JSON.stringify(data));
-      handleSetFavoriteNumber();
-      return data;
-    });
+  const addFavoriteHandler = favoritePicture => {
+    setUserFavorites(prevUserFavorites => {
+      const newFavorites = prevUserFavorites.concat(favoritePicture)
+      localStorage.setItem(
+        storageFavoriteKey,
+        newFavoritesJSONHandler(newFavorites)
+      )
+      setUserFavoritesNumber(getLocalStorageLength())
+      return newFavorites
+    })
   }
 
-  function removeFavoriteHandler(meetingId) {
-    setUserFavorites((prevUserFavorites) => {
-      const data = prevUserFavorites.filter(
-        (meeting) => meeting.id !== meetingId
-      );
+  const removeFavoriteHandler = pictureId => {
+    setUserFavorites(prevUserFavorites => {
+      const newFavorites = prevUserFavorites.filter(
+        picture => picture.id !== pictureId
+      )
 
-      localStorage.removeItem("favorite"); //Xóa storage cũ để set dữ liệu mới
-      localStorage.setItem("favorite", JSON.stringify(data));
+      localStorage.removeItem(storageFavoriteKey)
+      localStorage.setItem(
+        storageFavoriteKey,
+        newFavoritesJSONHandler(newFavorites)
+      )
+      setUserFavoritesNumber(getLocalStorageLength())
 
-      handleSetFavoriteNumber();
-
-      return data;
-    });
+      return newFavorites
+    })
   }
 
-  function itemIsFavoriteHandler(meetupId) {
-    const dataStorage = JSON.parse(localStorage.getItem("favorite"));
+  const itemIsFavoriteHandler = pictureId => {
+    // const isFavoriteStorage = dataStorageJSON && getLocalStorageLength() !== 0
+    const isFavoriteStorage = dataStorageJSON && dataStorageJSON.length !== 0
 
-    if (!dataStorage || dataStorage.length === 0) {
-      return userFavorites.some((meetup) => meetup.id === meetupId);
+    let isFavorite
+
+    if (isFavoriteStorage) {
+      isFavorite = dataStorageJSON.some(item => item.id === pictureId)
     } else {
-      return dataStorage.some((item) => item.id === meetupId);
+      isFavorite = userFavorites.some(picture => picture.id === pictureId)
     }
+
+    return isFavorite
   }
 
   const context = {
     favorites: userFavorites,
-    totalFavorites: favoriteNumber,
+    totalFavorites: userFavoritesNumber,
     addFavorite: addFavoriteHandler,
     removeFavorite: removeFavoriteHandler,
     itemIsFavorite: itemIsFavoriteHandler,
-    setFavoriteNumber: setFavoriteNumber,
-    favoriteNumber: favoriteNumber,
     setUserFavorites: setUserFavorites,
-  };
+  }
 
   return (
     <FavoriteContext.Provider value={context}>
       {children}
     </FavoriteContext.Provider>
-  );
+  )
 }
 
-export default FavoriteContext;
+export default FavoriteContext

@@ -1,24 +1,26 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
-import "./index.scss";
-import { BrowserRouter } from "react-router-dom";
-import { FavoriteContextProvider } from "./stores/favorite-context";
-import { NavActiveProvider } from "./stores/navactive-context";
-import { LoadingContextProvider } from "./stores/getData-context";
-import { AuthContextProvider } from "./stores/auth-context";
+import React from 'react'
+import ReactDOM from 'react-dom'
+
+import { BrowserRouter } from 'react-router-dom'
+import { FavoriteContextProvider } from './stores/favorite-context'
+import { NavActiveProvider } from './stores/navActive-context'
+import { LoadingContextProvider } from './stores/getData-context'
+import { AuthContextProvider } from './stores/auth-context'
+import App from './App'
+
+import './index.scss'
 
 ReactDOM.render(
-  <AuthContextProvider>
-    <FavoriteContextProvider>
+  <BrowserRouter>
+    <AuthContextProvider>
       <NavActiveProvider>
         <LoadingContextProvider>
-          <BrowserRouter>
+          <FavoriteContextProvider>
             <App />
-          </BrowserRouter>
+          </FavoriteContextProvider>
         </LoadingContextProvider>
       </NavActiveProvider>
-    </FavoriteContextProvider>
-  </AuthContextProvider>,
-  document.getElementById("root")
-);
+    </AuthContextProvider>
+  </BrowserRouter>,
+  document.getElementById('root')
+)

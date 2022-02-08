@@ -1,40 +1,38 @@
-import { Routes, Route, Navigate } from "react-router-dom";
-import { useContext } from "react";
-import AddMeeting from "./pages/AddMeeting";
-import AllMeeting from "./pages/AllMeeting";
-import FavoriteMeeting from "./pages/FavoriteMeeting";
-import MainNav from "./components/navbar/MainNav";
-import Auth from "./pages/Auth";
-import AuthContext from "./stores/auth-context";
+import React, { useContext } from 'react'
+
+import { Routes, Route, Navigate } from 'react-router-dom'
+
+import AddPictures from './pages/AddPictures'
+import AllPictures from './pages/AllPictures'
+import FavoritePictures from './pages/FavoritePictures'
+import MainNav from './components/navbar/MainNav'
+import Auth from './pages/Auth'
+import AuthContext from './stores/auth-context'
 
 function App() {
-  const AuthCtx = useContext(AuthContext);
+  const { isLoggedIn } = useContext(AuthContext)
 
   return (
-    <div>
+    <>
       <MainNav />
       <Routes>
-        <Route path="/" element={<AllMeeting />} />
+        <Route path="/" element={<AllPictures />} />
         <Route
-          path="/add-meeting"
-          element={
-            AuthCtx.isLoggedIn ? <AddMeeting /> : <Navigate to="/auth" />
-          }
+          path="/add-pics"
+          element={isLoggedIn ? <AddPictures /> : <Navigate to="/auth" />}
         />
         <Route
-          path="/favorite-meeting"
-          element={
-            AuthCtx.isLoggedIn ? <FavoriteMeeting /> : <Navigate to="/auth" />
-          }
+          path="/favorite-pics"
+          element={isLoggedIn ? <FavoritePictures /> : <Navigate to="/auth" />}
         />
         <Route
           path="/auth"
-          element={!AuthCtx.isLoggedIn ? <Auth /> : <Navigate to="/" />}
+          element={!isLoggedIn ? <Auth /> : <Navigate to="/" />}
         />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-    </div>
-  );
+    </>
+  )
 }
 
-export default App;
+export default App

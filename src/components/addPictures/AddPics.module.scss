@@ -1,21 +1,15 @@
-$primary-Color: #fff;
-$primary-BG: #1b1b1b;
-$second-Color: #f90;
-
-.form {
-  margin-top: 50px;
-}
+@import '../sass/colors';
 
 .formLabel {
-  color: $second-Color;
+  color: $primary-color;
   font-size: 18px;
   font-weight: 600;
 }
 
 .formControl {
-  background-color: $primary-BG;
-  color: $primary-Color;
-  border: 1px solid $primary-Color;
+  background-color: $background-color;
+  color: $second-color;
+  border: 1px solid $second-color;
 }
 
 .formDrop {
@@ -24,23 +18,23 @@ $second-Color: #f90;
 
 .formDropMenu {
   width: 200px;
-  background-color: $primary-BG;
+  background-color: $background-color;
 }
 
 .formDropMenuItem {
   font-size: 18px;
   line-height: 2;
   font-weight: 600;
-  color: $primary-Color;
+  color: $second-color;
 
   &:active {
-    background-color: $second-Color;
-    color: $primary-Color;
+    background-color: $second-color;
+    color: $primary-color;
   }
 
   &:hover {
-    background-color: $second-Color;
-    color: $primary-Color;
+    background-color: $primary-color;
+    color: $second-color;
   }
 }
 

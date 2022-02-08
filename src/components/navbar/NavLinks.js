@@ -1,59 +1,64 @@
-import React from "react";
-import { Nav } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { useContext } from "react";
-import NavActiveContext from "../../stores/navactive-context";
-import FavoriteContext from "../../stores/favorite-context";
-import AuthContext from "../../stores/auth-context";
-import styles from "./NavLinks.module.scss";
-import NavUser from "./NavUser";
+import React, { useContext } from 'react'
 
-function NavLinks(props) {
-  const NavActiveCtx = useContext(NavActiveContext);
-  const FavoriteCtx = useContext(FavoriteContext);
-  const AuthCtx = useContext(AuthContext);
+import { Nav } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
-  const { active, handleActiveTab } = NavActiveCtx;
+import NavActiveContext from '../../stores/navActive-context'
+import FavoriteContext from '../../stores/favorite-context'
+import AuthContext from '../../stores/auth-context'
+import NavUser from './NavUser'
+import { ADD_PAGE, ALL_PAGE, FAV_PAGE } from '../../constants/_tabName'
+
+import styles from './NavLinks.module.scss'
+
+function NavLinks() {
+  const { active, handleActiveTab } = useContext(NavActiveContext)
+  const { totalFavorites } = useContext(FavoriteContext)
+  const { isLoggedIn } = useContext(AuthContext)
 
   return (
     <Nav className="mr-auto">
-      {AuthCtx.isLoggedIn && (
+      {isLoggedIn && (
         <>
           <Link
-            to={"/"}
-            className={`${active === "All" ? styles.active : styles.navLinks}`}
+            to={'/'}
+            className={`${
+              active === ALL_PAGE ? styles.active : styles.navLinks
+            }`}
             onClick={() => {
-              handleActiveTab("All");
+              handleActiveTab(ALL_PAGE)
             }}
           >
             Your Gallery
           </Link>
           <Link
-            to={"/add-meeting"}
-            className={`${active === "Add" ? styles.active : styles.navLinks}`}
+            to={'/add-pics'}
+            className={`${
+              active === ADD_PAGE ? styles.active : styles.navLinks
+            }`}
             onClick={() => {
-              handleActiveTab("Add");
+              handleActiveTab(ADD_PAGE)
             }}
           >
             Add Gallery
           </Link>
           <Link
-            to={"/favorite-meeting"}
-            className={`${active === "Fav" ? styles.active : styles.navLinks}`}
+            to={'/favorite-pics'}
+            className={`${
+              active === FAV_PAGE ? styles.active : styles.navLinks
+            }`}
             onClick={() => {
-              handleActiveTab("Fav");
+              handleActiveTab(FAV_PAGE)
             }}
           >
-            Favorite Gallery{" "}
-            <span className={styles.totalFavorite}>
-              {FavoriteCtx.favoriteNumber}
-            </span>
+            Favorite Gallery{' '}
+            <span className={styles.totalFavorite}>{totalFavorites}</span>
           </Link>
         </>
       )}
       <NavUser />
     </Nav>
-  );
+  )
 }
 
-export default NavLinks;
+export default NavLinks

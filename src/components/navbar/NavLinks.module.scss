@@ -1,20 +1,19 @@
-$primary-Color: #fff;
-$primary-BG: #1b1b1b;
-$second-Color: #f90;
+@import '../sass/colors';
 
 .navLinks {
   text-decoration: none;
   font-size: 20px;
   font-weight: 600;
-  color: $primary-Color;
-  margin: 10px;
+  color: $second-color;
+  margin: 0 10px;
   padding: 0;
+  line-height: 70px;
   &:hover {
-    color: $second-Color;
+    color: $primary-color;
   }
 
   span {
-    color: $second-Color;
+    color: $primary-color;
   }
 }
 
@@ -22,13 +21,14 @@ $second-Color: #f90;
   text-decoration: none;
   font-size: 20px;
   font-weight: 600;
-  color: $second-Color;
-  margin: 10px;
+  color: $primary-color;
+  margin: 0 10px;
+  line-height: 70px;
   &:hover {
-    color: $primary-Color;
+    color: $second-color;
   }
 
   span {
-    color: $second-Color;
+    color: $primary-color;
   }
 }

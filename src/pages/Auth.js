@@ -1,20 +1,24 @@
-import React, { useContext } from "react";
-import AuthForm from "../components/auth/AuthForm";
-import AuthSlogan from "../components/auth/AuthSlogan";
-import { Container, Row } from "react-bootstrap";
-import NavActiveContext from "../stores/navactive-context";
-import "../components/sass/_custom.scss";
+import React, { useContext, useEffect } from 'react'
+
+import { Container, Row } from 'react-bootstrap'
+
+import AuthForm from '../components/auth/AuthForm'
+import AuthSlogan from '../components/auth/AuthSlogan'
+import NavActiveContext from '../stores/navActive-context'
+import { AUTH_PAGE } from '../constants/_tabName'
+
+import '../components/sass/_custom.scss'
 
 function Auth() {
-  const NavActiveCtx = useContext(NavActiveContext);
+  const { handleActiveTab } = useContext(NavActiveContext)
 
-  React.useEffect(() => {
-    NavActiveCtx.handleActiveTab("Auth");
-  }, [NavActiveCtx]);
+  useEffect(() => {
+    handleActiveTab(AUTH_PAGE)
+  }, [handleActiveTab])
 
   return (
     <Container
-      style={{ height: "100vh" }}
+      style={{ height: '100vh' }}
       className="d-flex justify-content-center align-items-center"
     >
       <Row>
@@ -22,7 +26,7 @@ function Auth() {
         <AuthForm />
       </Row>
     </Container>
-  );
+  )
 }
 
-export default Auth;
+export default Auth

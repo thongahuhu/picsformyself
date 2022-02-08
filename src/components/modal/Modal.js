@@ -1,128 +1,167 @@
-import React from "react";
-import { forwardRef, useContext } from "react";
-import { Card, Button, Container, Row } from "react-bootstrap";
-import { remove, ref, update } from "firebase/database";
-import { db } from "../../firebase/config";
-import "bootstrap/dist/css/bootstrap.min.css";
-import styles from "./Modal.module.scss";
-import LoadingContext from "../../stores/getData-context";
-import FavoriteContext from "../../stores/favorite-context";
-import AuthContext from "../../stores/auth-context";
-import { storage } from "../../firebase/config";
-import { ref as refFirebase, deleteObject } from "firebase/storage";
-import Zoom from "react-medium-image-zoom";
-import "react-medium-image-zoom/dist/styles.css";
-import AddMeets from "../addmeetings/AddMeets";
-import clsx from "clsx";
+import React, {
+  forwardRef,
+  useContext,
+  useState,
+  useRef,
+  useEffect,
+} from 'react'
+
+import { Card, Container, Row, Button } from 'react-bootstrap'
+import { remove, ref, update } from 'firebase/database'
+import { db } from '../../firebase/config'
+import { ref as refFirebase, deleteObject } from 'firebase/storage'
+import { storage } from '../../firebase/config'
+import Zoom from 'react-medium-image-zoom'
+import clsx from 'clsx'
+
+import LoadingContext from '../../stores/getData-context'
+import FavoriteContext from '../../stores/favorite-context'
+import AuthContext from '../../stores/auth-context'
+import { IMAGE_TYPE, VIDEO_TYPE } from '../../constants/_displayTypeName'
+import {
+  gif,
+  jfif,
+  jpeg,
+  jpg,
+  png,
+  raw,
+  tiff,
+} from '../../constants/_imageType'
+import AddPics from '../addPictures/AddPics'
+
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'react-medium-image-zoom/dist/styles.css'
+import styles from './Modal.module.scss'
 
 function Modal(props, backDropRef) {
-  const LoadedMeetingsCtx = useContext(LoadingContext);
-  const FavoriteCtx = useContext(FavoriteContext);
-  const AuthCtx = useContext(AuthContext);
-  const [edit, setEdit] = React.useState(false);
-  const [showOption, setShowOption] = React.useState();
-  const videoRef = React.useRef();
+  const { pictureItem, isOpenModal, setPropagation, onCancel } = props
 
-  React.useEffect(() => {
-    const jpeg = "jpeg";
-    const jpg = "jpg";
-    const png = "png";
-    if (props.props.image.includes(jpeg)) {
-      setShowOption("image");
-    } else if (props.props.image.includes(jpg)) {
-      setShowOption("image");
-    } else if (props.props.image.includes(png)) {
-      setShowOption("image");
+  const [isEdit, setIsEdit] = useState(false)
+  const [displayType, setDisplayType] = useState(null)
+
+  const { getData } = useContext(LoadingContext)
+  const { removeFavorite } = useContext(FavoriteContext)
+  const { isLoggedIn } = useContext(AuthContext)
+
+  const videoRef = useRef()
+
+  useEffect(() => {
+    if (pictureItem.image.includes(jpeg)) {
+      setDisplayType(IMAGE_TYPE)
+    } else if (pictureItem.image.includes(jpg)) {
+      setDisplayType(IMAGE_TYPE)
+    } else if (pictureItem.image.includes(png)) {
+      setDisplayType(IMAGE_TYPE)
+    } else if (pictureItem.image.includes(jfif)) {
+      setDisplayType(IMAGE_TYPE)
+    } else if (pictureItem.image.includes(gif)) {
+      setDisplayType(IMAGE_TYPE)
+    } else if (pictureItem.image.includes(tiff)) {
+      setDisplayType(IMAGE_TYPE)
+    } else if (pictureItem.image.includes(raw)) {
+      setDisplayType(IMAGE_TYPE)
     } else {
-      setShowOption("video");
+      setDisplayType(VIDEO_TYPE)
     }
-  }, [props.props.image]);
+  }, [pictureItem.image])
 
-  React.useEffect(() => {
-    if (props.openState && showOption === "video") {
-      videoRef.current.play();
+  useEffect(() => {
+    if (isOpenModal && displayType === VIDEO_TYPE) {
+      videoRef.current.play()
     }
-  }, [props.openState, showOption]);
+  }, [isOpenModal, displayType])
 
-  const handleDeleteStorage = () => {
-    const imageStorageRef = refFirebase(storage, props.props.image);
-    deleteObject(imageStorageRef);
-  };
+  const deleteFirebaseStorageHandler = () => {
+    const imageStorageRef = refFirebase(storage, pictureItem.image)
+    deleteObject(imageStorageRef)
+  }
 
-  const handleDelete = (id) => {
-    if (window.confirm("Are you sure?")) {
-      remove(ref(db, `meetings/${id}`));
-      FavoriteCtx.removeFavorite(props.props.id);
+  const deletePictureHandler = id => {
+    if (window.confirm('Are you sure?')) {
+      remove(ref(db, `pictures/${id}`))
+      removeFavorite(pictureItem.id)
       setTimeout(() => {
-        LoadedMeetingsCtx.getData();
-      }, 1000);
-      props.onCancel();
-      handleDeleteStorage();
+        getData()
+      }, 1000)
+      onCancel()
+      deleteFirebaseStorageHandler()
     }
-  };
+  }
 
-  const handleEditData = (data) => {
-    update(ref(db, `meetings/${props.props.id}`), data);
-    handleDeleteStorage();
+  const editPictureHandler = data => {
+    update(ref(db, `pictures/${pictureItem.id}`), data)
     setTimeout(() => {
-      LoadedMeetingsCtx.getData();
-    }, 1000);
-  };
+      getData()
+    }, 1000)
+    deleteFirebaseStorageHandler()
+    onCancel()
+  }
 
-  const handleEdit = () => {
-    setEdit(!edit);
-  };
+  const showEditHandler = () => {
+    setIsEdit(prevState => !prevState)
+  }
+
+  let cardStyle = clsx(styles.card, {
+    [styles.displayNone]: isEdit,
+  })
+
+  let content
+
+  if (displayType === IMAGE_TYPE) {
+    content = (
+      <Zoom>
+        <Card.Img
+          variant="top"
+          src={pictureItem.image}
+          className={styles.cardImg}
+        />
+      </Zoom>
+    )
+  } else {
+    content = (
+      <video
+        controls
+        ref={videoRef}
+        src={pictureItem.image}
+        className={styles.cardImg}
+      />
+    )
+  }
 
   return (
-    <div className={styles.backDrop} ref={backDropRef} onClick={props.onCancel}>
+    <div className={styles.backDrop} ref={backDropRef} onClick={onCancel}>
       <Card
-        style={{ width: "20rem" }}
-        className={clsx(styles.card, {
-          [styles.displayNone]: edit,
-        })}
-        onClick={(e) => props.setPropagation(e)}
+        style={{ width: '20rem' }}
+        className={cardStyle}
+        onClick={e => setPropagation(e)}
       >
-        {showOption === "image" ? (
-          <Zoom>
-            <picture>
-              <Card.Img
-                variant="top"
-                src={props.props.image}
-                className={styles.cardImg}
-              />
-            </picture>
-          </Zoom>
-        ) : (
-          <video
-            controls
-            ref={videoRef}
-            src={props.props.image}
-            className={styles.cardImg}
-          />
-        )}
+        {content}
+
         <Card.Body className={styles.cardBody}>
           <Card.Title className={styles.cardTitle}>
-            {props.props.title}
+            {pictureItem.title}
           </Card.Title>
           <Card.Text className={styles.cardAddress}>
-            {props.props.address}
+            {pictureItem.address}
           </Card.Text>
           <Card.Text className={styles.cardDesc}>
-            {props.props.description}
+            {pictureItem.description}
           </Card.Text>
-          {AuthCtx.isLoggedIn && (
+          {isLoggedIn && (
             <>
               <Button
                 variant="warning"
                 className={styles.cardBtn}
-                onClick={() => handleDelete(props.props.id)}
+                style={{ backgroundColor: '#c71c1c', color: '#fff' }}
+                onClick={() => deletePictureHandler(pictureItem.id)}
               >
                 Delete
               </Button>
               <Button
                 variant="warning"
                 className={styles.cardBtn}
-                onClick={handleEdit}
+                style={{ backgroundColor: '#1d1daf', color: '#fff' }}
+                onClick={showEditHandler}
               >
                 Edit
               </Button>
@@ -130,19 +169,19 @@ function Modal(props, backDropRef) {
           )}
         </Card.Body>
       </Card>
-      {edit && (
-        <Container className={styles.editContainer}>
+      {isEdit && (
+        <Container style={{ margin: 0, width: '90vh' }}>
           <Row>
-            <AddMeets
-              onPropagation={props.setPropagation}
-              handleEditData={handleEditData}
-              edit={edit}
+            <AddPics
+              onPropagation={setPropagation}
+              editPictureHandler={editPictureHandler}
+              isEdit={isEdit}
             />
           </Row>
         </Container>
       )}
     </div>
-  );
+  )
 }
 
-export default forwardRef(Modal);
+export default forwardRef(Modal)

@@ -1,8 +1,8 @@
-import React from "react";
-import { Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import React from 'react'
 
-import styles from "./AuthSlogan.module.scss";
+import { Col } from 'react-bootstrap'
+
+import styles from './AuthSlogan.module.scss'
 
 function AuthSlogan() {
   return (
@@ -15,17 +15,17 @@ function AuthSlogan() {
       xxl={7}
       className={styles.authSloganSection}
     >
-      <Link className={styles.authLogo} to={"/"}>
+      <p className={styles.authLogo}>
         Pics<span className={styles.authLogoBack}>hub</span>
-      </Link>
+      </p>
       <h2 className={styles.authSlogan}>
         There's a lot more to picshub than you think!
       </h2>
       <div className={styles.profileIconSection}>
         <a
           href="https://www.facebook.com/TCT.44/"
-          target={"_blank"}
-          rel={"noreferrer"}
+          target={'_blank'}
+          rel={'noreferrer'}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -43,8 +43,8 @@ function AuthSlogan() {
         </a>
         <a
           href="https://github.com/thongahuhu"
-          target={"_blank"}
-          rel={"noreferrer"}
+          target={'_blank'}
+          rel={'noreferrer'}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -59,7 +59,7 @@ function AuthSlogan() {
         </a>
       </div>
     </Col>
-  );
+  )
 }
 
-export default AuthSlogan;
+export default AuthSlogan

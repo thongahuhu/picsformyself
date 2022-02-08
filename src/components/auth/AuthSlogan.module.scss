@@ -1,6 +1,4 @@
-$primary-Color: #fff;
-$primary-BG: #1b1b1b;
-$second-Color: #f90;
+@import '../sass/colors';
 
 @mixin flexCenter {
   display: flex;
@@ -11,22 +9,13 @@ $second-Color: #f90;
 .authLogo {
   font-size: 40px;
   font-weight: 700;
-  color: $primary-Color;
+  color: $second-color;
   text-decoration: none;
-  cursor: pointer;
-
-  &:hover {
-    color: $second-Color;
-
-    span {
-      color: $primary-Color;
-    }
-  }
 }
 
 .authLogoBack {
-  color: $primary-BG;
-  background-color: $second-Color;
+  color: $background-color;
+  background-color: $primary-color;
   border-radius: 4px;
 }
 
@@ -35,7 +24,7 @@ $second-Color: #f90;
   font-size: 54px;
   font-weight: 700;
   text-transform: uppercase;
-  color: $primary-Color;
+  color: $second-color;
   margin-top: 30px;
 }
 
@@ -44,7 +33,7 @@ $second-Color: #f90;
   cursor: pointer;
 
   &:hover {
-    fill: $second-Color;
+    fill: $primary-color;
   }
 }
 
