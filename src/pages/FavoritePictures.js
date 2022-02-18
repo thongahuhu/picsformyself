@@ -22,7 +22,7 @@ function FavoritePictures() {
     if (dataStorage && dataStorage.length !== 0) {
       setUserFavorites(dataStorage.map(item => item))
     }
-  }, [dataStorage, setUserFavorites, handleActiveTab])
+  }, [])
 
   let content
 

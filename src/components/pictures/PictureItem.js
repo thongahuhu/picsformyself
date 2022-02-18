@@ -147,7 +147,7 @@ function PictureItem(props) {
                 className={styles.cardItemBtn}
                 onClick={toggleFavoriteHandler}
               >
-                {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
+                {isFavorite ? 'Xóa khỏi yêu thích' : 'Thêm vào yêu thích'}
               </Button>
             )}
           </Card.Body>

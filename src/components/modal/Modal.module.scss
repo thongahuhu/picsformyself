@@ -1,10 +1,5 @@
 @import '../sass/colors';
-
-@mixin flexCenter {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+@import '../sass/flexCenter';
 
 .backDrop {
   position: fixed;
@@ -17,7 +12,7 @@
   backdrop-filter: blur(10px);
   transition: 0.5s;
   z-index: 3000;
-  @include flexCenter();
+  @include flexCenter(row);
   animation: ease 0.5s;
 }
 
@@ -85,6 +80,22 @@
 }
 
 .cardBtn {
-  width: 40%;
+  width: 50px;
+  height: 50px;
   margin: 0 10px;
+  border-radius: 50%;
+}
+
+.cardBtnText {
+  @include flexCenter(row);
+}
+
+.modalDelete {
+  margin: 0;
+  z-index: 10000;
+}
+
+.cancelButton {
+  background-color: #6c757d;
+  color: $second-color;
 }

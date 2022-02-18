@@ -1,4 +1,5 @@
 @import '../sass/colors';
+@import '../sass/flexCenter';
 
 .formLabel {
   color: $primary-color;
@@ -26,6 +27,7 @@
   line-height: 2;
   font-weight: 600;
   color: $second-color;
+  @include flexCenter(row);
 
   &:active {
     background-color: $second-color;

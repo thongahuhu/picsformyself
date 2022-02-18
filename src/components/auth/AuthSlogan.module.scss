@@ -1,11 +1,5 @@
 @import '../sass/colors';
 
-@mixin flexCenter {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .authLogo {
   font-size: 40px;
   font-weight: 700;
@@ -50,12 +44,6 @@
   }
 
   .profileIconSection {
-    // @include flexCenter();
-
-    // svg {
-    //   width: 28px;
-    //   height: 28px;
-    // }
     display: none;
   }
 }

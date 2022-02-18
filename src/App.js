@@ -12,6 +12,8 @@ import AuthContext from './stores/auth-context'
 function App() {
   const { isLoggedIn } = useContext(AuthContext)
 
+  console.log(process.env)
+
   return (
     <>
       <MainNav />

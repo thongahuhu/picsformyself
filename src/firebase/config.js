@@ -3,7 +3,7 @@ import { getDatabase } from 'firebase/database'
 import { getStorage } from 'firebase/storage'
 
 const firebaseConfig = {
-  apiKey: process.env.API_KEY,
+  apiKey: process.env.REACT_APP_API_KEY,
   authDomain: 'pics4urself-7b237.firebaseapp.com',
   databaseURL:
     'https://pics4urself-7b237-default-rtdb.asia-southeast1.firebasedatabase.app/',
