@@ -29,6 +29,7 @@ function AddPics(props) {
   const descInputRef = useRef()
 
   const previewHandler = e => {
+    console.log(e.target.files[0])
     if (e.target.files && !props.isEdit) {
       const previewImageFile = URL.createObjectURL(e.target.files[0])
       setPreview(previewImageFile) //Nếu dùng cho edit sẽ không có ảnh preview vì làm lỗi giao diện
@@ -148,6 +149,8 @@ function AddPics(props) {
           <Form.Control
             required
             type="file"
+            accept="image/*"
+            autoComplete="off"
             className={styles.formControl}
             onChange={e => {
               imageFileHandler(e)
