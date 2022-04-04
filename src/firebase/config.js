@@ -4,13 +4,13 @@ import { getStorage } from 'firebase/storage'
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
-  authDomain: 'pics4urself-7b237.firebaseapp.com',
+  authDomain: 'pics4urself.firebaseapp.com',
   databaseURL:
-    'https://pics4urself-7b237-default-rtdb.asia-southeast1.firebasedatabase.app/',
-  projectId: 'pics4urself-7b237',
-  storageBucket: 'pics4urself-7b237.appspot.com',
-  messagingSenderId: '606823122591',
-  appId: '1:606823122591:web:0edc0912b8b26a24f7c4aa',
+    'https://pics4urself-default-rtdb.asia-southeast1.firebasedatabase.app',
+  projectId: 'pics4urself',
+  storageBucket: 'pics4urself.appspot.com',
+  messagingSenderId: '1055965552119',
+  appId: '1:1055965552119:web:282858f90f00faf5a522f2',
 }
 
 const app = initializeApp(firebaseConfig)
